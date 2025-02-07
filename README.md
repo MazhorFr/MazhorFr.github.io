@@ -158,26 +158,6 @@
             background: rgba(0, 86, 179, 0.85); /* Semi-transparent darker blue */
         }
 
-        /* Audio Toggle */
-        .audio-toggle {
-            position: fixed;
-            bottom: 80px; /* Positioned above the dark mode toggle */
-            right: 20px;
-            background: rgba(0, 191, 255, 0.85); /* Semi-transparent blue */
-            color: rgba(255, 255, 255, 0.9); /* Slightly transparent white for blending */
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1rem;
-            backdrop-filter: blur(5px); /* Adds a futuristic blur effect */
-            z-index: 3; /* Ensure toggle is above raindrops */
-        }
-
-        .audio-toggle:hover {
-            background: rgba(0, 150, 255, 0.85); /* Semi-transparent darker blue */
-        }
-
         /* Raindrop Styles */
         .raindrop {
             position: fixed; /* Use fixed positioning to avoid interfering with scrolling */
@@ -194,4 +174,95 @@
                 transform: translateY(100vh);
             }
         }
-    </
+    </style>
+</head>
+<body>
+    <!-- Raindrops Container -->
+    <div id="rain-container"></div>
+
+    <!-- Audio Element -->
+    <audio id="background-audio" loop>
+        <source src="YOUR_DIRECT_MP3_LINK_HERE" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- Header -->
+    <header>
+        <h1>Phaze</h1>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="#features">Features</a>
+        <a href="#about">About</a>
+        <a href="https://discord.gg/JjE92cXfvk">Contact</a>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h2>Welcome to Project Phaze</h2>
+        <p>Phaze is a Discord bot that has many features, one of them including nuking DC servers. Phaze isn’t just a bot; it has services as well. To check it out, press the Contact button at the top.</p>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="feature-card">
+            <h3>Discord Bot</h3>
+            <p>Phaze is the ultimate Discord bot that can be used as a nuke bot and a community bot. Our devs worked especially hard to make you guys a trolling and community bot. If you want your server to be protected from Phaze, click Contact Us above and make a ticket.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Services</h3>
+            <p>Phaze isn’t just a Discord bot; it is part of Phaze Services. We offer many free and premium services such as AI jailbreaking, how to make multi-tools, keyloggers, and an amazing community for coders/scripters to enjoy.</p>
+        </div>
+        <div class="feature-card">
+            <h3>About the Owners</h3>
+            <p>Zyrx is the main developer and owner of Phaze Services, and he also runs Arlo Bot (another DC nuke bot server). Then there’s Mazhor, the community owner and multi-tool/keylogger creator. If you want the source code or for us to host a bot, click on Contact Us and make a buyer ticket.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2023 Phaze. All rights reserved.</p>
+    </footer>
+
+    <!-- Dark Mode Toggle -->
+    <button class="dark-mode-toggle" onclick="toggleDarkMode()">Toggle Dark Mode</button>
+
+    <script>
+        // Dark Mode Toggle
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+        }
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Raindrop Generator
+        const rainContainer = document.getElementById('rain-container');
+
+        function createRaindrop() {
+            const raindrop = document.createElement('div');
+            raindrop.classList.add('raindrop');
+            raindrop.style.left = `${Math.random() * 100}vw`;
+            raindrop.style.animationDuration = `${Math.random() * 0.5 + 0.5}s`;
+            raindrop.style.opacity = Math.random();
+            rainContainer.appendChild(raindrop);
+
+            // Remove raindrop after it falls
+            setTimeout(() => {
+                raindrop.remove();
+            }, 5000);
+        }
+
+        // Generate raindrops every 50ms
+        setInterval(createRaindrop, 50);
+    </script>
+</body>
+</html>
