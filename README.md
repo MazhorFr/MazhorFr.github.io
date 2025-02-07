@@ -202,7 +202,7 @@
 
     <!-- Audio Element -->
     <audio id="background-audio" loop>
-        <source src="https://www.youtube.com/embed/LlN8MPS7KQs?autoplay=1&loop=1&playlist=LlN8MPS7KQs" type="audio/mpeg">
+        <source src="YOUR_DIRECT_MP3_LINK_HERE" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
 
@@ -249,7 +249,7 @@
     <button class="dark-mode-toggle" onclick="toggleDarkMode()">Toggle Dark Mode</button>
 
     <!-- Audio Toggle -->
-    <button class="audio-toggle" onclick="toggleAudio()">Toggle Audio</button>
+    <button class="audio-toggle" onclick="toggleAudio()">Play Audio</button>
 
     <script>
         // Dark Mode Toggle
