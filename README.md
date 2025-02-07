@@ -14,7 +14,6 @@
             color: rgba(255, 255, 255, 0.9); /* Slightly transparent white for blending */
             background-color: rgba(58, 27, 110, 0.9); /* Space Purple with 90% opacity */
             transition: background-color 0.3s, color 0.3s;
-            overflow: hidden; /* Prevent scrollbars from appearing */
         }
 
         body.dark-mode {
@@ -159,9 +158,29 @@
             background: rgba(0, 86, 179, 0.85); /* Semi-transparent darker blue */
         }
 
+        /* Audio Toggle */
+        .audio-toggle {
+            position: fixed;
+            bottom: 80px; /* Positioned above the dark mode toggle */
+            right: 20px;
+            background: rgba(0, 191, 255, 0.85); /* Semi-transparent blue */
+            color: rgba(255, 255, 255, 0.9); /* Slightly transparent white for blending */
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            backdrop-filter: blur(5px); /* Adds a futuristic blur effect */
+            z-index: 3; /* Ensure toggle is above raindrops */
+        }
+
+        .audio-toggle:hover {
+            background: rgba(0, 150, 255, 0.85); /* Semi-transparent darker blue */
+        }
+
         /* Raindrop Styles */
         .raindrop {
-            position: absolute;
+            position: fixed; /* Use fixed positioning to avoid interfering with scrolling */
             top: -50px;
             width: 2px;
             height: 50px;
@@ -180,6 +199,12 @@
 <body>
     <!-- Raindrops Container -->
     <div id="rain-container"></div>
+
+    <!-- Audio Element -->
+    <audio id="background-audio" loop>
+        <source src="https://www.youtube.com/embed/LlN8MPS7KQs?autoplay=1&loop=1&playlist=LlN8MPS7KQs" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
 
     <!-- Header -->
     <header>
@@ -223,6 +248,9 @@
     <!-- Dark Mode Toggle -->
     <button class="dark-mode-toggle" onclick="toggleDarkMode()">Toggle Dark Mode</button>
 
+    <!-- Audio Toggle -->
+    <button class="audio-toggle" onclick="toggleAudio()">Toggle Audio</button>
+
     <script>
         // Dark Mode Toggle
         function toggleDarkMode() {
@@ -258,6 +286,20 @@
 
         // Generate raindrops every 50ms
         setInterval(createRaindrop, 50);
+
+        // Audio Toggle
+        const audio = document.getElementById('background-audio');
+        audio.volume = 0.5; // Set volume to 50%
+
+        function toggleAudio() {
+            if (audio.paused) {
+                audio.play();
+                document.querySelector('.audio-toggle').textContent = 'Pause Audio';
+            } else {
+                audio.pause();
+                document.querySelector('.audio-toggle').textContent = 'Play Audio';
+            }
+        }
     </script>
 </body>
 </html>
