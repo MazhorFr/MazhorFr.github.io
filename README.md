@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arlo - Enhanced Clone</title>
+    <title>Phaze - Enhanced Clone</title>
     <style>
         /* Global Styles */
         body {
@@ -11,18 +11,19 @@
             margin: 0;
             padding: 0;
             line-height: 1.6;
-            color: #333;
-            background-color: #f4f4f4;
+            color: rgba(255, 255, 255, 0.9); /* Slightly transparent white for blending */
+            background-color: rgba(58, 27, 110, 0.9); /* Space Purple with 90% opacity */
             transition: background-color 0.3s, color 0.3s;
+            overflow: hidden; /* Prevent scrollbars from appearing */
         }
 
         body.dark-mode {
-            background-color: #333;
-            color: #f4f4f4;
+            background-color: rgba(51, 51, 51, 0.9); /* Dark mode with 90% opacity */
+            color: rgba(255, 255, 255, 0.9); /* Slightly transparent white for blending */
         }
 
         a {
-            color: #007BFF;
+            color: rgba(0, 191, 255, 0.9); /* Slightly transparent bright blue for links */
             text-decoration: none;
         }
 
@@ -32,10 +33,13 @@
 
         /* Header */
         header {
-            background: #007BFF;
-            color: #fff;
+            background: rgba(46, 26, 71, 0.85); /* Midnight Purple with 85% opacity */
+            color: rgba(255, 255, 255, 0.9); /* Slightly transparent white for blending */
             padding: 20px 0;
             text-align: center;
+            backdrop-filter: blur(5px); /* Adds a futuristic blur effect */
+            position: relative; /* Ensure header is above raindrops */
+            z-index: 2;
         }
 
         header h1 {
@@ -47,12 +51,15 @@
         nav {
             display: flex;
             justify-content: center;
-            background: #333;
+            background: rgba(51, 51, 51, 0.85); /* Semi-transparent dark background */
             padding: 10px 0;
+            backdrop-filter: blur(5px); /* Adds a futuristic blur effect */
+            position: relative; /* Ensure nav is above raindrops */
+            z-index: 2;
         }
 
         nav a {
-            color: #fff;
+            color: rgba(255, 255, 255, 0.9); /* Slightly transparent white for blending */
             margin: 0 15px;
             font-size: 1.1rem;
         }
@@ -65,8 +72,11 @@
             justify-content: center;
             height: 60vh;
             background: url('https://via.placeholder.com/1920x1080') no-repeat center center/cover;
-            color: #fff;
+            color: rgba(255, 255, 255, 0.9); /* Slightly transparent white for blending */
             text-align: center;
+            backdrop-filter: blur(5px); /* Adds a futuristic blur effect */
+            position: relative; /* Ensure hero is above raindrops */
+            z-index: 2;
         }
 
         .hero h2 {
@@ -85,14 +95,17 @@
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
             padding: 40px 20px;
+            position: relative; /* Ensure features are above raindrops */
+            z-index: 2;
         }
 
         .feature-card {
-            background: #fff;
+            background: rgba(255, 255, 255, 0.1); /* Semi-transparent white */
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s, box-shadow 0.3s;
+            backdrop-filter: blur(5px); /* Adds a futuristic blur effect */
         }
 
         .feature-card:hover {
@@ -103,18 +116,23 @@
         .feature-card h3 {
             margin-top: 0;
             font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.9); /* Slightly transparent white for blending */
         }
 
         .feature-card p {
             font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8); /* Slightly darker transparent white for contrast */
         }
 
         /* Footer */
         footer {
-            background: #333;
-            color: #fff;
+            background: rgba(51, 51, 51, 0.85); /* Semi-transparent dark background */
+            color: rgba(255, 255, 255, 0.9); /* Slightly transparent white for blending */
             text-align: center;
             padding: 20px 0;
+            backdrop-filter: blur(5px); /* Adds a futuristic blur effect */
+            position: relative; /* Ensure footer is above raindrops */
+            z-index: 2;
         }
 
         footer p {
@@ -126,58 +144,80 @@
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: #007BFF;
-            color: #fff;
+            background: rgba(0, 123, 255, 0.85); /* Semi-transparent blue */
+            color: rgba(255, 255, 255, 0.9); /* Slightly transparent white for blending */
             border: none;
             padding: 10px 20px;
             border-radius: 5px;
             cursor: pointer;
             font-size: 1rem;
+            backdrop-filter: blur(5px); /* Adds a futuristic blur effect */
+            z-index: 3; /* Ensure toggle is above raindrops */
         }
 
         .dark-mode-toggle:hover {
-            background: #0056b3;
+            background: rgba(0, 86, 179, 0.85); /* Semi-transparent darker blue */
+        }
+
+        /* Raindrop Styles */
+        .raindrop {
+            position: absolute;
+            top: -50px;
+            width: 2px;
+            height: 50px;
+            background: linear-gradient(to bottom, rgba(0, 191, 255, 0.8), rgba(0, 191, 255, 0.2));
+            animation: fall linear infinite;
+            z-index: 1; /* Ensure raindrops are behind content */
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Raindrops Container -->
+    <div id="rain-container"></div>
+
     <!-- Header -->
     <header>
-        <h1>Arlo</h1>
+        <h1>Phaze</h1>
     </header>
 
     <!-- Navigation -->
     <nav>
         <a href="#features">Features</a>
         <a href="#about">About</a>
-        <a href="#contact">Contact</a>
+        <a href="https://discord.gg/JjE92cXfvk">Contact</a>
     </nav>
 
     <!-- Hero Section -->
     <section class="hero">
-        <h2>Welcome to Arlo</h2>
-        <p>Your ultimate solution for modern web development. Built with precision, designed for performance.</p>
+        <h2>Welcome to Project Phaze</h2>
+        <p>Phaze is a Discord bot that has many features, one of them including nuking DC servers. Phaze isn’t just a bot; it has services as well. To check it out, press the Contact button at the top.</p>
     </section>
 
     <!-- Features Section -->
     <section id="features" class="features">
         <div class="feature-card">
-            <h3>Feature One</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque leo a libero tincidunt.</p>
+            <h3>Discord Bot</h3>
+            <p>Phaze is the ultimate Discord bot that can be used as a nuke bot and a community bot. Our devs worked especially hard to make you guys a trolling and community bot. If you want your server to be protected from Phaze, click Contact Us above and make a ticket.</p>
         </div>
         <div class="feature-card">
-            <h3>Feature Two</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque leo a libero tincidunt.</p>
+            <h3>Services</h3>
+            <p>Phaze isn’t just a Discord bot; it is part of Phaze Services. We offer many free and premium services such as AI jailbreaking, how to make multi-tools, keyloggers, and an amazing community for coders/scripters to enjoy.</p>
         </div>
         <div class="feature-card">
-            <h3>Feature Three</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque leo a libero tincidunt.</p>
+            <h3>About the Owners</h3>
+            <p>Zyrx is the main developer and owner of Phaze Services, and he also runs Arlo Bot (another DC nuke bot server). Then there’s Mazhor, the community owner and multi-tool/keylogger creator. If you want the source code or for us to host a bot, click on Contact Us and make a buyer ticket.</p>
         </div>
     </section>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2023 Arlo. All rights reserved.</p>
+        <p>&copy; 2023 Phaze. All rights reserved.</p>
     </footer>
 
     <!-- Dark Mode Toggle -->
@@ -198,6 +238,26 @@
                 });
             });
         });
+
+        // Raindrop Generator
+        const rainContainer = document.getElementById('rain-container');
+
+        function createRaindrop() {
+            const raindrop = document.createElement('div');
+            raindrop.classList.add('raindrop');
+            raindrop.style.left = `${Math.random() * 100}vw`;
+            raindrop.style.animationDuration = `${Math.random() * 0.5 + 0.5}s`;
+            raindrop.style.opacity = Math.random();
+            rainContainer.appendChild(raindrop);
+
+            // Remove raindrop after it falls
+            setTimeout(() => {
+                raindrop.remove();
+            }, 5000);
+        }
+
+        // Generate raindrops every 50ms
+        setInterval(createRaindrop, 50);
     </script>
 </body>
 </html>
